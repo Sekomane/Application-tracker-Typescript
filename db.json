@@ -1,0 +1,8 @@
+{
+  "users": [
+    { "id": 1, "username": "admin", "password": "1234" }
+  ],
+  "jobs": [
+    { "id": 1, "company": "Mlab", "role": "Frontend Developer", "status": "Applied", "date": "2025-08-20", "details": "React, TypeScript" }
+  ]
+}
