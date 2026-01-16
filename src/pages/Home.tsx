@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import "../styles/styles.css";
+import { useNavigate } from "react-router-dom";
+import Layout from "../components/Layout";
 
 interface Job {
   company: string;
@@ -23,15 +23,15 @@ const Home: React.FC = () => {
     return JSON.parse(localStorage.getItem("jobs") || "[]");
   });
 
-  const [company, setCompany] = useState<string>("");
-  const [role, setRole] = useState<string>("");
+  const [company, setCompany] = useState("");
+  const [role, setRole] = useState("");
   const [status, setStatus] = useState<Job["status"]>("Applied");
-  const [dateApplied, setDateApplied] = useState<string>("");
-  const [extraDetails, setExtraDetails] = useState<string>("");
+  const [dateApplied, setDateApplied] = useState("");
+  const [extraDetails, setExtraDetails] = useState("");
   const [editingIndex, setEditingIndex] = useState<number | null>(null);
 
-  const [searchQuery, setSearchQuery] = useState<string>("");
-  const [filterStatus, setFilterStatus] = useState<string>("");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filterStatus, setFilterStatus] = useState("");
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
 
   useEffect(() => {
@@ -69,9 +69,8 @@ const Home: React.FC = () => {
   };
 
   const handleDelete = (index: number) => {
-    if (window.confirm("Are you sure you want to delete this job?")) {
-      const updatedJobs = jobs.filter((_, i) => i !== index);
-      setJobs(updatedJobs);
+    if (window.confirm("Delete this job?")) {
+      setJobs(jobs.filter((_, i) => i !== index));
     }
   };
 
@@ -90,71 +89,56 @@ const Home: React.FC = () => {
     });
 
   return (
-    <div className="page-container">
-      <nav className="navbar">
-        <ul className="nav-links">
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/about">About</Link></li>
-          <li><Link to="/contact">Contact</Link></li>
-          <li>
-            <button
-              className="logout-btn"
-              onClick={() => {
-                localStorage.removeItem("auth");
-                navigate("/login");
-              }}
+    <Layout>
+      <h2 style={{ marginBottom: "30px" }}>My Job Applications</h2>
+
+      <div className="contact-content">
+        {/* Job Form */}
+        <div className="contact-form-card">
+          <h3>{editingIndex !== null ? "Edit Job" : "Add New Job"}</h3>
+
+          <form onSubmit={handleSubmit} className="auth-form">
+            <input
+              value={company}
+              onChange={(e) => setCompany(e.target.value)}
+              placeholder="Company"
+              required
+            />
+            <input
+              value={role}
+              onChange={(e) => setRole(e.target.value)}
+              placeholder="Role"
+              required
+            />
+            <select
+              value={status}
+              onChange={(e) => setStatus(e.target.value as Job["status"])}
             >
-              Logout
+              <option>Applied</option>
+              <option>Interviewed</option>
+              <option>Rejected</option>
+            </select>
+            <input
+              type="date"
+              value={dateApplied}
+              onChange={(e) => setDateApplied(e.target.value)}
+            />
+            <textarea
+              value={extraDetails}
+              onChange={(e) => setExtraDetails(e.target.value)}
+              placeholder="Notes"
+            />
+            <button className="primary-btn" type="submit">
+              {editingIndex !== null ? "Update Job" : "Add Job"}
             </button>
-          </li>
-        </ul>
-      </nav>
+          </form>
+        </div>
 
-      <div className="home-content">
-        <h2>Job Application Tracker</h2>
-
-        <form className="job-form" onSubmit={handleSubmit}>
+        {/* Filters */}
+        <div className="contact-info-card">
+          <h3>Search & Filter</h3>
           <input
-            type="text"
-            value={company}
-            onChange={(e) => setCompany(e.target.value)}
-            placeholder="Company Name"
-            required
-          />
-          <input
-            type="text"
-            value={role}
-            onChange={(e) => setRole(e.target.value)}
-            placeholder="Position"
-            required
-          />
-          <select
-            value={status}
-            onChange={(e) => setStatus(e.target.value as Job["status"])}
-          >
-            <option>Applied</option>
-            <option>Interviewed</option>
-            <option>Rejected</option>
-          </select>
-          <input
-            type="date"
-            value={dateApplied}
-            onChange={(e) => setDateApplied(e.target.value)}
-          />
-          <textarea
-            value={extraDetails}
-            onChange={(e) => setExtraDetails(e.target.value)}
-            placeholder="Notes about the Job"
-          />
-          <button type="submit">
-            {editingIndex !== null ? "Update Job" : "Add Job"}
-          </button>
-        </form>
-
-        <div className="job-controls">
-          <input
-            type="text"
-            placeholder="Search by company or role"
+            placeholder="Search company or role"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
@@ -171,33 +155,44 @@ const Home: React.FC = () => {
             value={sortOrder}
             onChange={(e) => setSortOrder(e.target.value as "asc" | "desc")}
           >
-            <option value="asc">Sort by Date ↑</option>
-            <option value="desc">Sort by Date ↓</option>
+            <option value="asc">Oldest First</option>
+            <option value="desc">Newest First</option>
           </select>
         </div>
-
-        <div className="job-list">
-          {filteredJobs.length === 0 ? (
-            <p>No jobs found</p>
-          ) : (
-            filteredJobs.map((job, index) => (
-              <div
-                className={`job-card ${job.status.toLowerCase()}`}
-                key={index}
-              >
-                <h3>{job.company}</h3>
-                <p><strong>Role:</strong> {job.role}</p>
-                <p><strong>Status:</strong> {job.status}</p>
-                <p><strong>Date Applied:</strong> {job.dateApplied}</p>
-                <p>{job.extraDetails}</p>
-                <button onClick={() => handleEdit(index)}>Edit</button>
-                <button onClick={() => handleDelete(index)}>Delete</button>
-              </div>
-            ))
-          )}
-        </div>
       </div>
-    </div>
+
+      {/* Job Cards */}
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+          gap: "25px",
+          padding: "60px",
+        }}
+      >
+        {filteredJobs.map((job, index) => (
+          <div key={index} className="contact-info-card">
+            <h3>{job.company}</h3>
+            <p><strong>Role:</strong> {job.role}</p>
+            <p><strong>Status:</strong> {job.status}</p>
+            <p><strong>Date:</strong> {job.dateApplied}</p>
+            <p>{job.extraDetails}</p>
+            <div style={{ display: "flex", gap: "10px" }}>
+              <button className="primary-btn" onClick={() => handleEdit(index)}>
+                Edit
+              </button>
+              <button
+                className="primary-btn"
+                style={{ background: "#ef4444" }}
+                onClick={() => handleDelete(index)}
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+    </Layout>
   );
 };
 

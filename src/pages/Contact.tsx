@@ -39,96 +39,83 @@ const Contact: React.FC = () => {
     setTimeout(() => setSubmitted(false), 3000);
   };
 
-  return (
-    <div className="home-container">
-      {/* Navbar */}
-      <nav className="navbar">
-        <ul className="nav-links">
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/about">About</Link></li>
-          <li><Link to="/contact">Contact</Link></li>
-          <li><Link to="/login">Login</Link></li>
-          <li><Link to="/register">Sign-up</Link></li>
-        </ul>
-      </nav>
+ return (
+  <div className="contact-page">
+    {/* Navbar */}
+    <nav className="navbar">
+      <div className="nav-logo">JobTracker</div>
+      <ul className="nav-links">
+        <li><Link to="/">Home</Link></li>
+        <li><Link to="/about">About</Link></li>
+        <li><Link to="/contact" className="active">Contact</Link></li>
+        <li><Link to="/login">Login</Link></li>
+        <li><Link to="/register" className="signup-btn">Sign-up</Link></li>
+      </ul>
+    </nav>
 
-      {/* Contact Header */}
-      <div className="about-header">
-        <h1 className="about-title">Contact Us</h1>
-        <p className="about-subtitle">Have questions or complaints? Reach out to us!</p>
+    {/* Header */}
+    <section className="contact-hero">
+      <h1>Contact Us</h1>
+      <p>We’re here to help. Send us your questions or complaints.</p>
+    </section>
+
+    {/* Content */}
+    <section className="contact-content">
+      {/* Contact Info */}
+      <div className="contact-info-card">
+        <h2>Our Details</h2>
+        <p><strong>Email:</strong> {contact.email}</p>
+        <p><strong>Phone:</strong> {contact.phone}</p>
+        <p><strong>Support:</strong> {contact.support}</p>
+        <p><strong>Address:</strong> {contact.address}, {contact.city}, {contact.zipcode}</p>
+        <p><strong>Country:</strong> {contact.country}</p>
       </div>
 
-      {/* Feedback Form */}
-      <div className="feedback-form-section">
-        <h2>Send Us Your Feedback</h2>
-        {submitted && <p className="success-msg">Thank you! Your feedback has been submitted.</p>}
-        <form onSubmit={handleSubmit} className="feedback-form">
+      {/* Form */}
+      <div className="contact-form-card">
+        <h2>Send Feedback</h2>
+
+        {submitted && <p className="success-msg">Your message has been sent successfully.</p>}
+
+        <form onSubmit={handleSubmit}>
           <input
             type="text"
             name="name"
-            placeholder="Your Name"
+            placeholder="Full Name"
             value={feedback.name}
             onChange={handleChange}
             required
           />
+
           <input
             type="email"
             name="email"
-            placeholder="Your Email"
+            placeholder="Email Address"
             value={feedback.email}
             onChange={handleChange}
             required
           />
+
           <textarea
             name="message"
-            placeholder="Write your feedback or complaint here..."
+            placeholder="Write your message..."
             value={feedback.message}
             onChange={handleChange}
             required
           />
-          <button type="submit">Submit Feedback</button>
+
+          <button type="submit" className="primary-btn">Send Message</button>
+
         </form>
       </div>
+    </section>
 
-      {/* Footer */}
-      <footer className="footer">
-        <div className="footer-container">
-
-          {/* Quick Links */}
-          <div className="footer-section">
-            <h3>Quick Links</h3>
-            <ul>
-              <li><Link to="/">Home</Link></li>
-              <li><Link to="/about">About</Link></li>
-              <li><Link to="/contact">Contact</Link></li>
-              <li><Link to="/login">Login</Link></li>
-              <li><Link to="/register">Sign-up</Link></li>
-            </ul>
-          </div>
-
-          {/* Contact Info */}
-          <div className="footer-section">
-            <h3>Contact Us</h3>
-            <p>Email: {contact.email}</p>
-            <p>Phone: {contact.phone}</p>
-            <p>Support: {contact.support}</p>
-          </div>
-
-          {/* Location Info */}
-          <div className="footer-section">
-            <h3>Location</h3>
-            <p>{contact.address}</p>
-            <p>{contact.city}, {contact.zipcode}</p>
-            <p>{contact.country}</p>
-          </div>
-
-        </div>
-        <div className="footer-bottom">
-          <p>© 2025 Job Application Tracker. All Rights Reserved.</p>
-        </div>
-      </footer>
-    </div>
-  );
+    {/* Footer */}
+    <footer className="footer">
+      <p>© 2025 Job Application Tracker. All Rights Reserved.</p>
+    </footer>
+  </div>
+);
 };
 
 export default Contact;

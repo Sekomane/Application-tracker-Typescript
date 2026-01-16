@@ -1,126 +1,104 @@
 import { Link } from "react-router-dom";
+import Layout from "../components/Layout";
 import jobssImg from "../assets/jobss.webp";
-import contact from "../data/contact.json"; 
-import "../styles/styles.css";
 
 export default function Landing() {
   return (
-    <div className="home-container">
+    <Layout>
+      {/* Hero */}
+      <section className="contact-hero">
+        <h1>Job Application Tracker</h1>
+        <p>Apply, track and manage your job hunt in one place.</p>
+      </section>
 
-      <nav className="navbar">
-        <ul className="nav-links">
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/about">About Us</Link></li>
-          <li><Link to="/login">Login</Link></li>
-          <li><Link to="/register">Register</Link></li>
-          <li><Link to="/contact">Contact Us</Link></li>
-        </ul>
-      </nav>
+      {/* Main content */}
+      <section className="contact-content">
+        <div className="contact-info-card">
+          <h2>Why Choose Us?</h2>
+          <p>
+            Keep all your job applications, interviews and deadlines organised
+            in one powerful dashboard so you can focus on landing your next
+            opportunity.
+          </p>
 
-      {}
-      <div className="header">
-        <div className="header-content">
-          <h1 className="content">
-            <p className="slogan">Job Application Tracker</p>
-            <strong style={{ color: "red" }}>Apply</strong>,{" "}
-            <strong style={{ color: "blue" }}>Track</strong>,{" "}
-            <strong style={{ color: "yellow" }}>And manage</strong> <br />
-            <strong style={{ color: "black" }}>Your Job Hunting</strong>
-          </h1>
+          <p>
+            Track your progress, stay organised and increase your chances of
+            getting hired faster.
+          </p>
 
-          <img src={jobssImg} alt="Job Tracker" className="header-image" />
-        </div>
-      </div>
-
-      {}
-      <p className="intro">
-        Keep all your job applications, deadlines, and interviews organized in one place so you can focus on landing your next opportunity.
-      </p>
-      <h2 className="choose">Why Choose Our Free Job Application Tracker.</h2>
-      <p className="description">
-        Stay Connected, Organized and get Job offers faster of your desired Job
-      </p>
-
-      {}
-      <div className="stats-row">
-        <div className="stat-item">
-          <h2 className="tentimes">10x</h2>
-          <p className="desc">Fast Job Search</p>
-        </div>
-        <div className="stat-item">
-          <h2 className="tentimes">90%</h2>
-          <p className="desc">Job Interviews</p>
-        </div>
-        <div className="stat-item">
-          <h2 className="tentimes">100%</h2>
-          <p className="desc">Job Application Tracked</p>
-        </div>
-      </div>
-
-      {}
-      <div className="feedback-section">
-        <h2 className="feedback-title">What Job Seekers Say</h2>
-        <div className="feedback-container">
-          <div className="feedback-card">
-            <div className="stars">★★★★☆</div>
-            <p className="feedback-text">
-              This tracker helped me stay organized and get my dream job faster!
-            </p>
-            <p className="feedback-author">Rorisang S.</p>
-          </div>
-
-          <div className="feedback-card">
-            <div className="stars">★★★★★</div>
-            <p className="feedback-text">
-              Simple, easy-to-use, and keeps all my job applications in one place.
-            </p>
-            <p className="feedback-author">Zwanga M.</p>
-          </div>
-
-          <div className="feedback-card">
-            <div className="stars">★★★★☆</div>
-            <p className="feedback-text">
-              I love how it tracks interviews and deadlines automatically.
-            </p>
-            <p className="feedback-author">Mbali M.</p>
-          </div>
-        </div>
-      </div>
-
-      {}
-      <footer className="footer">
-        <div className="footer-container">
-          <div className="footer-section">
-            <h3>Quick Links</h3>
-            <ul>
-              <li><Link to="/">Home</Link></li>
-              <li><Link to="/about">About</Link></li>
-              <li><Link to="/contact">Contact</Link></li>
-              <li><Link to="/login">Login</Link></li>
-              <li><Link to="/register">Sign-up</Link></li>
-            </ul>
-          </div>
-
-          <div className="footer-section">
-            <h3>Contact Us</h3>
-            <p>Email: {contact.email}</p>
-            <p>Phone: {contact.phone}</p>
-            <p>Support: {contact.support}</p>
-          </div>
-
-          <div className="footer-section">
-            <h3>Location</h3>
-            <p>{contact.address}</p>
-            <p>{contact.city}, {contact.zipcode}</p>
-            <p>{contact.country}</p>
-          </div>
+          <Link to="/register" className="primary-btn">
+            Get Started
+          </Link>
         </div>
 
-        <div className="footer-bottom">
-          <p>© 2025 Job Application Tracker. All Rights Reserved.</p>
+        <div className="contact-form-card">
+          <img
+            src={jobssImg}
+            alt="Job tracker"
+            style={{ width: "100%", borderRadius: "12px" }}
+          />
         </div>
-      </footer>
+      </section>
 
-    </div>
+      {/* Stats */}
+      <section className="stats-section">
+        <div className="stat-box">
+          <h2>10×</h2>
+          <p>Faster Job Search</p>
+        </div>
+
+        <div className="stat-box">
+          <h2>90%</h2>
+          <p>More Interviews</p>
+        </div>
+
+        <div className="stat-box">
+          <h2>100%</h2>
+          <p>Applications Tracked</p>
+        </div>
+      </section>
+
+
+      {/* Testimonials */}
+      <section style={{ padding: "60px" }}>
+        <h2 style={{ textAlign: "center", marginBottom: "40px" }}>
+          What Job Seekers Say
+        </h2>
+
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+            gap: "30px",
+          }}
+        >
+  <div className="testimonial-grid">
+  <div className="testimonial-card">
+    <div className="rating">★★★★☆</div>
+    <p>
+      This tracker helped me stay organised and get my dream job faster.
+    </p>
+    <span>Rorisang S.</span>
+  </div>
+
+  <div className="testimonial-card featured">
+    <div className="rating">★★★★★</div>
+    <p>
+      Simple, easy-to-use, and keeps all my job applications in one place.
+    </p>
+    <span>Zwanga M.</span>
+  </div>
+
+  <div className="testimonial-card">
+    <div className="rating">★★★★☆</div>
+    <p>
+      I love how it tracks interviews and deadlines automatically.
+    </p>
+    <span>Mbali M.</span>
+  </div>
+</div>
+        </div>
+      </section>
+    </Layout>
   );
 }
