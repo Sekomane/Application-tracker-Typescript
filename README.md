@@ -1,69 +1,84 @@
-# React + TypeScript + Vite
+# Job Application Tracker
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Job Application Tracker is a modern web application built to help job seekers track, manage, and organize their job applications, interviews, and follow-ups in one place.
 
-Currently, two official plugins are available:
+The app makes it easy to stay organised and improve your chances of getting hired by keeping everything in a single dashboard.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+* Register and login system
+* Add, edit, and delete job applications
+* Track job status (Applied, Interviewed, Rejected)
+* Search and filter job applications
+* Sort jobs by application date
+* Store data locally using the browser
+* Clean and responsive user interface
+* Contact and feedback page
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+## Built With
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+* React
+* TypeScript
+* Vite
+* React Router
+* CSS
+* LocalStorage
+
+---
+
+## How to Run the Project
+
+1. Clone the repository
+
+```
+git clone https://github.com/your-username/application-tracker-typescript.git
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+2. Open the project folder
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
 ```
+cd application-tracker-typescript
+```
+
+3. Install dependencies
+
+```
+npm install
+```
+
+4. Run the application
+
+```
+npm run dev
+```
+
+Open the link shown in the terminal (usually [http://localhost:5173](http://localhost:5173)) in your browser.
+
+---
+
+## How to Use
+
+1. Register a new account
+2. Login with your username and password
+3. Add job applications with company name, role, date and status
+4. Edit or delete jobs as needed
+5. Use search, filter and sorting to manage your applications
+
+---
+
+## Project Purpose
+
+This project was created to demonstrate front-end development skills using React and TypeScript, including UI design, routing, and CRUD functionality. It can be used as a personal job-tracking tool or as a portfolio project.
+
+---
+
+## Author
+
+Rorisang Sekomane
+Final-year Computer Science Student
+
+---
